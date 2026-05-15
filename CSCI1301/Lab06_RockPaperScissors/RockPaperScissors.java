@@ -19,12 +19,13 @@ public class RockPaperScissors {
         int playerScore, opponentScore, pointsToWin;
         String playerChoice;
         Boolean userRock, userPaper, userScissors, botRock, botPaper, botScissors;
-        playerScore = 0;
-        opponentScore = 0;
 
         // Points indicator
         System.out.print("Points to win: ");
         pointsToWin = INPUT.nextInt();
+
+        playerScore = 0;
+        opponentScore = 0;
 
         while ((playerScore < pointsToWin) && (opponentScore < pointsToWin)) {
 

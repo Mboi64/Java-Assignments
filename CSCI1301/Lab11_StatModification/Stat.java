@@ -19,27 +19,42 @@ public class Stat {
         this.data = new double[0];
     } // Default Constructor
 
-    public Stat(double[] d) {
-        setData(d);
+    public Stat(double[] doubleDataType) {
+        setData(doubleDataType);
     } // Constructor (data type: double)
 
-    public Stat(float[] f) {
-        setData(f);
+    public Stat(float[] floatDataType) {
+        if (floatDataType != null) {
+            this.data = new double[floatDataType.length];
+            for (int i = 0; i < floatDataType.length; i++) {
+                this.data[i] = floatDataType[i];
+            } // for
+        } // if
     } // Constructor (data type: float)
 
-    public Stat(int[] i) {
-        setData(i);
+    public Stat(int[] intDataType) {
+         if (intDataType != null) {
+            this.data = new double[intDataType.length];
+            for (int i = 0; i < intDataType.length; i++) {
+                this.data[i] = intDataType[i];
+            } // for
+        } // if
     } // Constructor (data type: integer)
 
-    public Stat(long[] lo) {
-        setData(lo);
+    public Stat(long[] longDataType) {
+       if (longDataType != null) {
+            this.data = new double[longDataType.length];
+            for (int i = 0; i < longDataType.length; i++) {
+                this.data[i] = longDataType[i];
+            } // for
+        } // if
     } // COnstructor (data type: long)
 
-    public void setData(double[] d) {
-        if (d != null) {
-            this.data = new double[d.length];
-            for (int i = 0; i < d.length; i++) {
-                this.data[i] = d[i];
+    public void setData(double[] doubleDataType) {
+        if (doubleDataType != null) {
+            this.data = new double[doubleDataType.length];
+            for (int i = 0; i < doubleDataType.length; i++) {
+                this.data[i] = doubleDataType[i];
             } // for
         } else {
             this.data = new double[0];
@@ -48,11 +63,11 @@ public class Stat {
 
     // Find a Way to SIMPLIFY
 
-    public void setData(float[] f) {
-        if (f != null) {
-            this.data = new double[f.length];
-            for (int i = 0; i < f.length; i++) {
-                this.data[i] = f[i];
+    public void setData(float[] floatDataType) {
+        if (floatDataType != null) {
+            this.data = new double[floatDataType.length];
+            for (int i = 0; i < floatDataType.length; i++) {
+                this.data[i] = floatDataType[i];
             } // for
         } // if
     } // setData (deep copy; data type: float)
@@ -66,11 +81,11 @@ public class Stat {
         } // if
     } // setData (deep copy; data type: int)
 
-    public void setData(long[] lo) {
-        if (lo != null) {
-            this.data = new double[lo.length];
-            for (int i = 0; i < lo.length; i++) {
-                this.data[i] = lo[i];
+    public void setData(long[] longDataType) {
+        if (longDataType != null) {
+            this.data = new double[longDataType.length];
+            for (int i = 0; i < longDataType.length; i++) {
+                this.data[i] = longDataType[i];
             } // for
         } // if
     } // setData (deep copy; data type: long)
@@ -85,10 +100,10 @@ public class Stat {
         return arr;
     } // getData (Deep Copy)
 
-    public boolean equals(Stat s) {
-        if (s != null && this.data.length == s.getData().length && !isEmpty()) {
+    public boolean equals(Stat status) {
+        if (status != null && this.data.length == status.getData().length && !isEmpty()) {
             final double THRESHOLD = 0.000000001;
-            double[] comparedData = s.getData();
+            double[] comparedData = status.getData();
             for (int i = 0; i < this.data.length; i++) {
                 boolean notEqualValueData = !(Math.abs(this.data[i] - comparedData[i]) < THRESHOLD);
                 if (notEqualValueData) {
@@ -106,15 +121,15 @@ public class Stat {
         this.data = new double[0];
     } // reset
 
-    public void append(double[] d) {
-        if (d != null) {
-            double[] arr = new double[d.length + this.data.length];
+    public void append(double[] doubleDataType) {
+        if (doubleDataType != null) {
+            double[] arr = new double[doubleDataType.length + this.data.length];
             for (int i = 0; i < this.data.length; i++) {
                 arr[i] = this.data[i];
             } // fpr (old array)
 
-            for (int i = 0; i < d.length; i++) {
-                arr[this.data.length + i] = d[i];
+            for (int i = 0; i < doubleDataType.length; i++) {
+                arr[this.data.length + i] = doubleDataType[i];
             } // for (new array)
 
             this.data = new double[arr.length];
@@ -122,15 +137,15 @@ public class Stat {
         }
     } // append (data type: double)
 
-    public void append(float[] f) {
-        if (f != null) {
-            double[] arr = new double[f.length + this.data.length];
+    public void append(float[] floatDataType) {
+        if (floatDataType != null) {
+            double[] arr = new double[floatDataType.length + this.data.length];
             for (int i = 0; i < this.data.length; i++) {
                 arr[i] = this.data[i];
             } // fpr (old array)
 
-            for (int i = 0; i < f.length; i++) {
-                arr[this.data.length + i] = f[i];
+            for (int i = 0; i < floatDataType.length; i++) {
+                arr[this.data.length + i] = floatDataType[i];
             } // for (new array)
 
             this.data = new double[arr.length];
@@ -138,15 +153,15 @@ public class Stat {
         }
     } // append (data type: float)
 
-    public void append(int[] i) {
-        if (i != null) {
-            double[] arr = new double[i.length + this.data.length];
-            for (int j = 0; j < this.data.length; j++) {
-                arr[j] = this.data[j];
+    public void append(int[] intDataType) {
+        if (intDataType != null) {
+            double[] arr = new double[intDataType.length + this.data.length];
+            for (int i = 0; i < this.data.length; i++) {
+                arr[i] = this.data[i];
             } // fpr (old array)
 
-            for (int j = 0; j < i.length; j++) {
-                arr[this.data.length + j] = i[j];
+            for (int i = 0; i < intDataType.length; i++) {
+                arr[this.data.length + i] = intDataType[i];
             } // for (new array)
 
             this.data = new double[arr.length];
@@ -154,15 +169,15 @@ public class Stat {
         }
     } // append (data type: integer)
 
-    public void append(long[] lo) {
-        if (lo != null) {
-            double[] arr = new double[lo.length + this.data.length];
+    public void append(long[] longDataType) {
+        if (longDataType != null) {
+            double[] arr = new double[longDataType.length + this.data.length];
             for (int i = 0; i < this.data.length; i++) {
                 arr[i] = this.data[i];
             } // fpr (old array)
 
-            for (int i = 0; i < lo.length; i++) {
-                arr[this.data.length + i] = lo[i];
+            for (int i = 0; i < longDataType.length; i++) {
+                arr[this.data.length + i] = longDataType[i];
             } // for (new array)
 
             this.data = new double[arr.length];

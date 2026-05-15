@@ -10,20 +10,6 @@
  * given program has many bugs and it is our job to debug any mishaps that may
  * occur in the code.
  *
- * Statement of Academic Honesty:
- *
- * The following code represents my own work. I have neither received nor given
- * inappropriate assistance. I have not copied or modified code from any source
- * other than the course webpage or the course textbook. I recognize that any
- * unauthorized assistance or plagiarism will be handled in accordance with the
- * University of Georgia's Academic Honesty Policy and the policies of this
- * course. I recognize that my work is based on an assignment created by the
- * School of Computing at the University of Georgia. Any publishing or posting
- * of source code for this assignment is strictly prohibited unless you have
- * written consent from the School of Computing at the University of Georgia.
- * 
- *
- *
  * This program does the following: Prompts the user to enter a temperature in
  * Fahrenheit and a temperature scale the user wants to convert it to. If both
  * the temperature in Fahrenheit and the temperature scale are valid, the
@@ -36,7 +22,7 @@ import java.util.Scanner;
 
 public class TemperatureConverter {
     // Creating the Scanner object
-    public static final Scanner keyboard = new Scanner(System.in);
+    public static final Scanner KEYBOARD = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -52,7 +38,7 @@ public class TemperatureConverter {
         String tempScaleStr = "";
 
         System.out.print("Enter the temperature in Fahrenheit: ");
-        fahrenheit = keyboard.nextDouble(); // Set a breakpoint here
+        fahrenheit = KEYBOARD.nextDouble(); // Set a breakpoint here
 
         // Verify the user's input
         if (fahrenheit < MIN_FAHRENHEIT) { // first if-statement: Set a breakpoint here
@@ -60,9 +46,14 @@ public class TemperatureConverter {
             System.exit(0);
         }
 
-        System.out.print("Enter the temperature scales you want to convert to:\n" + "1. Kelvin \n"
-            + "2. Rankine \n" + "3. Reaumur \n" + "4. Celsius\n" + "Enter a temperature scale: ");
-        tempScale = keyboard.nextInt();
+        System.out.print("""
+                         Enter the temperature scales you want to convert to:
+                         1. Kelvin 
+                         2. Rankine 
+                         3. Reaumur 
+                         4. Celsius
+                         Enter a temperature scale: """);
+        tempScale = KEYBOARD.nextInt();
 
         if ((tempScale >= 1) && (tempScale <= 4)) { // Second-if statement: Set a breakpoint here
             if (tempScale == 1) { // Set a breakpoint here
@@ -84,10 +75,10 @@ public class TemperatureConverter {
 
         } else {
             System.out.println("Unknown temperature scale  -" + "  cannot do calculation. Bye");
-            // System.exit(0);
+            System.exit(0);
         }
 
-        System.out.println(fahrenheit + " degrees Fahrenheit is " + convertedDegrees + " degrees"
+        System.out.println(fahrenheit + " degrees Fahrenheit is " + convertedDegrees + " degrees "
             + tempScaleStr + ".");
     }
 }

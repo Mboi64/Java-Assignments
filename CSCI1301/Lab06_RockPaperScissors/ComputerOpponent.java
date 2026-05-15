@@ -1,6 +1,6 @@
 /**
  * This class prints and gives you the computer's move in Rock, Paper, Scissors.
- * Provided by Lecturer
+ * Provided by Professor
  */
 public class ComputerOpponent {
 

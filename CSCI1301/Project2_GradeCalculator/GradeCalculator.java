@@ -18,21 +18,13 @@ public class GradeCalculator {
 
     public static void main(String[] args) {
 
-        double currentScore = 0, avgToFinalLetterGrade, currentKnownGradeWeight = 0;
-        double examScoreNumber1 = 0, weightScoreOfExam1 = 0;
-        double examScore2 = 0, weightScoreOfExam2 = 0;
-        double finalExamScore = 0, weightScoreOfFinalExam = 0;
-        double labScore = 0, weightScoreOfLab = 0;
-        double projectScore = 0, weightScoreOfProject;
-        double participationScore = 0, weightScoreOfParticipation;
-        double quizScore = 0, weightScoreOfQuiz = 0;
         String letterGrade;
 
         // Displays Grading Scale
         System.out.print("Grading Scale:\r\n" + "A\t 90 - 100\r\n" + "B\t 80 - 89\r\n"
             + "C\t 70 - 79\r\n" + "D\t 60 - 69\r\n" + "F\t below 60\r\n" + "");
 
-        // Checks whether the user input the correct grade
+        // Checks for correct inputs
         System.out.print("What letter grade do you want to achieve for the course?");
         letterGrade = INPUT.next();
         if (!(letterGrade.equalsIgnoreCase("a")) && !(letterGrade.equalsIgnoreCase("b"))
@@ -45,7 +37,7 @@ public class GradeCalculator {
         // Asks for the weight of each item
         System.out.println("Enter percentage weights below.");
         System.out.printf("Exam 1: \t");
-        double examWeightNumber1 = INPUT.nextInt();
+        double examWeight1 = INPUT.nextInt();
 
         System.out.printf("Exam 2: \t");
         double examWeight2 = INPUT.nextInt();
@@ -65,9 +57,8 @@ public class GradeCalculator {
         System.out.printf("Quizzes: \t");
         double quizWeight = INPUT.nextInt();
 
-        // Calculates and determines whether the weight is 100 and usable for the
-        // program
-        double totalGradeWeight = examWeightNumber1 + examWeight2 + finalExamWeight + labWeight
+        // Calculates is grade weight is usable
+        double totalGradeWeight = examWeight1 + examWeight2 + finalExamWeight + labWeight
             + projectWeight + participationWeight + quizWeight;
 
         if (totalGradeWeight != 100) {
@@ -75,42 +66,47 @@ public class GradeCalculator {
             System.exit(0);
         }
 
-        // Checks if the user input a "yes" for the exams, if not then the exam below
-        // will be skipped entirely
+        // Exam Weight and Scores
+        double currentKnownGradeWeight = 0;
+        double weightScoreOfExam1 = 0;
+        double weightScoreOfExam2 = 0;
+        double weightScoreOfFinalExam = 0;
+
+        // Checks if the user input a "yes" for the exams
         System.out.print("Do you know your exam 1 score?");
-        String studentConfirmation = INPUT.next();
-        if (studentConfirmation.equalsIgnoreCase("y")
-            || studentConfirmation.equalsIgnoreCase("yes")) {
+        String studentInput = INPUT.next();
+        boolean confirmation = studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes");
+        if (confirmation) {
             System.out.print("Score received on exam 1:");
-            examScoreNumber1 = INPUT.nextDouble();
-            weightScoreOfExam1 = examWeightNumber1 * examScoreNumber1;
+            double examScore1 = INPUT.nextDouble();
+            weightScoreOfExam1 = examWeight1 * examScore1;
             // The weighted item is added if the user agrees to having an average score
-            if (studentConfirmation.equalsIgnoreCase("y")
-                || studentConfirmation.equalsIgnoreCase("yes")) {
-                currentKnownGradeWeight += examWeightNumber1;
+            if (confirmation) {
+                currentKnownGradeWeight += examWeight1;
             }
 
             System.out.print("Do you know your exam 2 score?");
-            studentConfirmation = INPUT.next();
-            if (studentConfirmation.equalsIgnoreCase("y")
-                || studentConfirmation.equalsIgnoreCase("yes")) {
+            studentInput = INPUT.next();
+            confirmation = studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes");
+            if (confirmation) {
                 System.out.print("Score received on exam 2:");
-                examScore2 = INPUT.nextDouble();
+                double examScore2 = INPUT.nextDouble();
                 weightScoreOfExam2 = examWeight2 * examScore2;
-                if (studentConfirmation.equalsIgnoreCase("y")
-                    || studentConfirmation.equalsIgnoreCase("yes")) {
+                if (confirmation) {
                     currentKnownGradeWeight += examWeight2;
                 }
 
                 System.out.print("Do you know your final exam score?");
-                studentConfirmation = INPUT.next();
-                if (studentConfirmation.equalsIgnoreCase("y")
-                    || studentConfirmation.equalsIgnoreCase("yes")) {
+                studentInput = INPUT.next();
+                confirmation = studentInput.equalsIgnoreCase("y")
+                || studentInput.equalsIgnoreCase("yes");
+                if (confirmation) {
                     System.out.print("Score received on final exam:");
-                    finalExamScore = INPUT.nextDouble();
+                    double finalExamScore = INPUT.nextDouble();
                     weightScoreOfFinalExam = finalExamWeight * finalExamScore;
-                    if (studentConfirmation.equalsIgnoreCase("y")
-                        || studentConfirmation.equalsIgnoreCase("yes")) {
+                    if (confirmation) {
                         currentKnownGradeWeight += finalExamWeight;
                     }
                 }
@@ -118,51 +114,55 @@ public class GradeCalculator {
         }
 
         System.out.print("Do you know your lab average?");
-        studentConfirmation = INPUT.next();
-        if (studentConfirmation.equalsIgnoreCase("y")
-            || studentConfirmation.equalsIgnoreCase("yes")) {
+        double labScore = 0;
+        studentInput = INPUT.next();
+        if (studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes")) {
             System.out.print("Average lab grade:");
             labScore = INPUT.nextDouble();
             currentKnownGradeWeight += labWeight;
         }
-        weightScoreOfLab = labWeight * labScore;
+        double weightScoreOfLab = labWeight * labScore;
 
         System.out.print("Do you know your project average?");
-        studentConfirmation = INPUT.next();
-        if (studentConfirmation.equalsIgnoreCase("y")
-            || studentConfirmation.equalsIgnoreCase("yes")) {
+        double projectScore = 0;
+        studentInput = INPUT.next();
+        if (studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes")) {
             System.out.print("Average project grade:");
             projectScore = INPUT.nextDouble();
             currentKnownGradeWeight += projectWeight;
         }
-        weightScoreOfProject = projectWeight * projectScore;
+        double weightScoreOfProject = projectWeight * projectScore;
 
         System.out.print("Do you know your participation average?");
-        studentConfirmation = INPUT.next();
-        if (studentConfirmation.equalsIgnoreCase("y")
-            || studentConfirmation.equalsIgnoreCase("yes")) {
+        double participationScore = 0;
+        studentInput = INPUT.next();
+        if (studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes")) {
             System.out.print("Average participation grade:");
             participationScore = INPUT.nextDouble();
             currentKnownGradeWeight += participationWeight;
         }
-        weightScoreOfParticipation = participationWeight * participationScore;
+        double weightScoreOfParticipation = participationWeight * participationScore;
 
         System.out.print("Do you know your quiz average?");
-        studentConfirmation = INPUT.next();
-        if (studentConfirmation.equalsIgnoreCase("y")
-            || studentConfirmation.equalsIgnoreCase("yes")) {
+        double quizScore = 0;
+        studentInput = INPUT.next();
+        if (studentInput.equalsIgnoreCase("y")
+            || studentInput.equalsIgnoreCase("yes")) {
             System.out.print("Average quiz grade:");
             quizScore = INPUT.nextDouble();
             currentKnownGradeWeight += quizWeight;
         }
-        weightScoreOfQuiz = quizWeight * quizScore;
+        double weightScoreOfQuiz = quizWeight * quizScore;
 
         // Calculated weight items multiplied by the score item
         double avgOfScoreAndWeight = ((weightScoreOfExam1) + (weightScoreOfExam2)
             + (weightScoreOfFinalExam) + (weightScoreOfLab) + (weightScoreOfProject)
             + (weightScoreOfParticipation) + (weightScoreOfQuiz));
 
-        currentScore = avgOfScoreAndWeight / currentKnownGradeWeight;
+        double currentScore = avgOfScoreAndWeight / currentKnownGradeWeight;
 
         System.out.printf("Current grade score:%.2f\n", currentScore);
 
@@ -180,7 +180,7 @@ public class GradeCalculator {
         }
 
         // Formula to get the desired grade need to obtain specific grade
-        avgToFinalLetterGrade = ((100 * GradeCalculator.getFinalScore(letterGrade))
+        double avgToFinalLetterGrade = ((100 * GradeCalculator.getFinalScore(letterGrade))
             - avgOfScoreAndWeight) / (100 - currentKnownGradeWeight);
 
         // Indicator of if the user:
