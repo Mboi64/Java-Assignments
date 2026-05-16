@@ -29,6 +29,7 @@ public class Adventure {
         System.out.println();
 
         System.out.println(userLocationToMap.getDescription());
+        
         // creating a loop that repeats infinitely until the user dies or finds treasure
         while (userMap != null) {
 
